@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_qrGeneratedFragment"
+            app:destination="@id/qrGeneratedFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrGeneratedFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.QrGeneratedFragment"
+        android:label="fragment_qr_generated"
+        tools:layout="@layout/fragment_qr_generated" >
+
+
+        <argument
+            android:name="generated_result_text"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.ScannerFragment"
+        android:label="ScannerFragment" >
+
+        <action
+            android:id="@+id/action_scannerFragment_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanResultFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.ScanResultFragment"
+        android:label="fragment_scan_result"
+        tools:layout="@layout/fragment_scan_result" >
+        <argument
+            android:name="scannedResult"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" />
+
+</navigation>
