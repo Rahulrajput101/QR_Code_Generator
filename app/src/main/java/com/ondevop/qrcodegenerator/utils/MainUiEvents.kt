@@ -1,8 +1,15 @@
 package com.ondevop.qrcodegenerator.utils
 
+import android.graphics.Bitmap
+import androidx.camera.core.Camera
+import com.ondevop.qrcodegenerator.db.QrData
+
 sealed interface MainUiEvents{
-     object SaveQr : MainUiEvents
+     object AddQr : MainUiEvents
      object shareQr : MainUiEvents
-      object getQr : MainUiEvents
+     data class DeleteQr(val qrData : QrData) : MainUiEvents
+     
+
+
 
 }

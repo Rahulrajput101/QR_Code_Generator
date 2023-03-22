@@ -1,15 +1,22 @@
 package com.ondevop.qrcodegenerator.ui
 
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ondevop.qrcodegenerator.R
 import com.ondevop.qrcodegenerator.databinding.ActivityMainBinding
+import com.ondevop.qrcodegenerator.utils.QrUtility
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.IOException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHost.navController
         binding.bottomNavigation.setupWithNavController(navController)
+
 
 
         navHost.findNavController()
@@ -42,4 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
     }
+
+
 }

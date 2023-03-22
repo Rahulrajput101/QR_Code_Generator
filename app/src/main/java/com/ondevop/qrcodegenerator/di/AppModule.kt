@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.ondevop.qrcodegenerator.db.QrDatabase
 import com.ondevop.qrcodegenerator.repository.Repository
-import com.ondevop.qrcodegenerator.utils.Constant.SHARED_PREFERENCE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

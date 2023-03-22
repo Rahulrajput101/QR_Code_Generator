@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.ondevop.qrcodegenerator.databinding.ItemSavedBinding
 import com.ondevop.qrcodegenerator.db.QrData
 
-class SavedAdapter() : RecyclerView.Adapter<SavedAdapter.MySavedViewHolder>()  {
+class SavedAdapter(val onUserClickListener: OnUserClickListener) : RecyclerView.Adapter<SavedAdapter.MySavedViewHolder>()  {
 
 
     val differCallBack = object : DiffUtil.ItemCallback<QrData>(){
@@ -39,7 +39,10 @@ class SavedAdapter() : RecyclerView.Adapter<SavedAdapter.MySavedViewHolder>()  {
 
     override fun onBindViewHolder(holder: MySavedViewHolder, position: Int) {
         val qr = differ.currentList[position]
-        holder.bind(qr)
+        holder.itemView.setOnClickListener {
+            onUserClickListener.onClick(qr)
+        }
+        holder.bind(qr,onUserClickListener)
     }
 
     class MySavedViewHolder(private val binding : ItemSavedBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -55,10 +58,14 @@ class SavedAdapter() : RecyclerView.Adapter<SavedAdapter.MySavedViewHolder>()  {
 
 
 
-        fun bind(qrData: QrData){
+        fun bind(qrData: QrData,onUserClickListener: OnUserClickListener){
             Glide.with(binding.root).load(qrData.bitmap).into(binding.itemImageView)
 
             binding.itemTextView.text = qrData.result
+
+            binding.deleteImageView.setOnClickListener {
+                onUserClickListener.onDeleteClick(qrData)
+            }
 
 
 
@@ -66,6 +73,12 @@ class SavedAdapter() : RecyclerView.Adapter<SavedAdapter.MySavedViewHolder>()  {
         }
 
 
+    }
+
+
+    class OnUserClickListener(val clickListener: (qrData : QrData) -> Unit, val deleteClickListener : (qrData : QrData) -> Unit) {
+        fun onClick(qrData: QrData) = clickListener(qrData)
+        fun onDeleteClick(qrData: QrData) =deleteClickListener(qrData)
     }
 
 

@@ -1,17 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-   <item
-    android:id="@+id/mainFragment"
-    android:title="Create"
-    android:icon="@drawable/baseline_add_circle_outline_24_dark"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/mainFragment"
+        android:title="Create"
+        android:icon="@drawable/baseline_add_circle_outline_24"
+        />
 
     <item
         android:id="@+id/scannerFragment"
         android:title="Scan"
-        android:icon="@drawable/baseline_qr_code_scanner_24_dark"/>
+        android:icon="@drawable/baseline_qr_code_scanner_24"
+        />
 
     <item
         android:id="@+id/savedFragment"
         android:title="Saved"
-        android:icon="@drawable/baseline_storage_24_dark"/>
+        android:icon="@drawable/baseline_storage_24"
+         />
 </menu>

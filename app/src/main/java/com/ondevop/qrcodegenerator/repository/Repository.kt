@@ -9,7 +9,6 @@ class Repository(
     private val dao: QrDao
 ) {
 
-
     suspend fun insertQr(qrData: QrData) {
         return dao.insertQr(qrData)
     }
@@ -17,6 +16,11 @@ class Repository(
     fun getQr(): LiveData<List<QrData>> {
         return dao.getQr()
     }
+
+    suspend fun deleteQr(qrData: QrData){
+        return dao.deleteQr(qrData)
+    }
+
 
 
 }

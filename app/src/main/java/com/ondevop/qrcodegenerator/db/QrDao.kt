@@ -2,6 +2,7 @@ package com.ondevop.qrcodegenerator.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
@@ -14,6 +15,9 @@ interface QrDao {
 
      @Query("SELECT * FROM qr_data")
      fun getQr() : LiveData<List<QrData>>
+
+     @Delete
+     suspend fun deleteQr(qrData: QrData)
 
 
 }
