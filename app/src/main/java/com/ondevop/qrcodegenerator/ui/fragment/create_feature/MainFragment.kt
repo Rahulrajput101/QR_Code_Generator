@@ -54,7 +54,6 @@ class MainFragment : Fragment() {
             }else{
                 Toast.makeText(requireContext(),"Please Enter the text",Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
         }
 
         return binding.root
