@@ -1,4 +1,4 @@
-package com.ondevop.qrcodegenerator.ui.fragment
+package com.ondevop.qrcodegenerator.ui.fragment.scan_screen
 
 import android.Manifest
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
-import androidx.camera.core.CameraControl
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat

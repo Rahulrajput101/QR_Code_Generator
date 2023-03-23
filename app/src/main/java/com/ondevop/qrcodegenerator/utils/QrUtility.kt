@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.camera.core.Camera
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -25,17 +26,20 @@ import java.nio.ByteBuffer
 
 object QrUtility {
 
-    fun hasCameraPermission(context : Context) =
-        ActivityCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+    fun hasCameraPermission(context: Context) =
+        ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
 
 
-
-     fun generateQrCode(text: String): Bitmap? {
+    fun generateQrCode(text: String): Bitmap? {
         val width = 800
         val height = 800
         val qrCodeWriter = QRCodeWriter()
         try {
-            val bitMatrix: BitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
+            val bitMatrix: BitMatrix =
+                qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
             for (x in 0 until width) {
                 for (y in 0 until height) {
@@ -54,8 +58,8 @@ object QrUtility {
     }
 
 
-    fun ByteBuffer.toByteArray() : ByteArray{
-       rewind()
+    fun ByteBuffer.toByteArray(): ByteArray {
+        rewind()
         return ByteArray(remaining()).also {
             get(it)
         }
@@ -64,32 +68,56 @@ object QrUtility {
     }
 
     //This Helper function checks the device is running on sdk 29 or above or else.
-    inline fun <T> sdk29AndUp(onSdk29 : () -> T): T? {
-        return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+    inline fun <T> sdk29AndUp(onSdk29: () -> T): T? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             onSdk29()
         } else null
 
     }
 
 
-//    fun shareQr( displayText: String){
-//
-//        // Get a File object for the QR code image
-//        val qrCodeFile = File(Environment.getExternalStorageDirectory(), "$displayText.jpg")
-//
-//        // Create a share intent with the ACTION_SEND action
-//        val shareIntent = Intent(Intent.ACTION_SEND)
-//
-//        // Set the MIME type of the content to "image/*"
-//        shareIntent.type = "image/*"
-//
-//        // Attach the QR code image to the share intent
-//        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(qrCodeFile.absolutePath))
-//
-//        // Launch the share dialog
-//        startActivity(Intent.createChooser(shareIntent, "Share QR code"))
-//
-//    }
+    //This method used to store the Qr code in external memory
+    fun saveQrToExternalStorage(context: Context, displayText: String, bitmap: Bitmap): Uri? {
+
+        val imageCollection = sdk29AndUp {
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        } ?: MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "$displayText.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            put(MediaStore.Images.Media.WIDTH, "${bitmap.width}")
+            put(MediaStore.Images.Media.HEIGHT, "${bitmap.height}")
+        }
+
+        return try {
+            val contentResolver = context.contentResolver
+            contentResolver.insert(imageCollection, contentValues)?.also { uri ->
+                contentResolver.openOutputStream(uri).use { outPutstream ->
+                    if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outPutstream)) {
+                        throw IOException("Couldn't save bitmap")
+                    }
+                }
+            } ?: throw IOException("Couldn't create MediaStore entry")
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    fun shareQr(qrUri: Uri?) : Intent?{
+          qrUri?.let {
+              return Intent(Intent.ACTION_SEND).also {
+                  it.type = "image/jpeg"
+                  // This will attach the QR code image to the share intent
+                  it.putExtra(Intent.EXTRA_STREAM, qrUri)
+                  it.putExtra(Intent.EXTRA_TEXT, "Hey, I have created this amazing QR code")
+              }
+          } ?: return null
+        // This creates a share intent with the ACTION_SEND action
+
+    }
+
 
 
 

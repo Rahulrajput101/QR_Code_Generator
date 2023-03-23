@@ -1,13 +1,11 @@
-package com.ondevop.qrcodegenerator.ui.fragment
+package com.ondevop.qrcodegenerator.ui.fragment.create_screen
 
 import android.graphics.Bitmap
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -35,9 +33,6 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(layoutInflater)
 
 
-
-
-
         binding.createButton.setOnClickListener {
             val text = binding.dataEdittext.text.toString()
             if (text.isNotEmpty()) {
@@ -54,7 +49,7 @@ class MainFragment : Fragment() {
             }else{
                 Toast.makeText(requireContext(),"Please Enter the text",Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(requireContext(), "$text", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
         }
 
 

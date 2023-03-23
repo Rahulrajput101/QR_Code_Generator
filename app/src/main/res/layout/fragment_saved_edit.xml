@@ -16,7 +16,7 @@
             android:layout_height="200dp"
             android:background="@color/md_theme_light_primary"
             android:scaleType="centerCrop"
-             />
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             tools:context=".fragment.FinshFragment">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/qrCardView"
+                android:id="@+id/EditQrCardView"
                 android:layout_width="0dp"
                 android:layout_height="350dp"
                 android:layout_marginStart="35dp"
@@ -41,14 +41,14 @@
                 app:layout_constraintVertical_bias="0.188">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/qrCardViewLayout"
+                    android:id="@+id/EditQrCardViewLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF">
 
 
                     <ImageView
-                        android:id="@+id/qr_image"
+                        android:id="@+id/editQrImage"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,97 +59,64 @@
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
-                        android:id="@+id/downloadText"
+                        android:id="@+id/editDownloadText"
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:text="Download"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/downloadImageView"
-                        app:layout_constraintStart_toStartOf="@+id/downloadImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/downloadImageView"
+                        app:layout_constraintEnd_toEndOf="@+id/downloadEditImageView"
+                        app:layout_constraintStart_toStartOf="@+id/downloadEditImageView"
+                        app:layout_constraintTop_toBottomOf="@+id/downloadEditImageView"
                         app:layout_constraintVertical_bias="0.509" />
 
-                    <TextView
-                        android:id="@+id/addText"
-                        style="@style/TextAppearance.AppCompat.Body2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
-                        android:text="Add"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/addImageView"
-                        app:layout_constraintHorizontal_bias="0.425"
-                        app:layout_constraintStart_toStartOf="@+id/addImageView"
-                        app:layout_constraintTop_toBottomOf="@+id/addImageView" />
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="2dp"
-                        android:layout_height="35dp"
-                        android:background="@color/md_theme_dark_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/qr_image"
-                        app:layout_constraintVertical_bias="0.5" />
 
                     <ImageView
-                        android:id="@+id/downloadImageView"
+                        android:id="@+id/downloadEditImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/view"
-                        app:layout_constraintHorizontal_bias="0.63"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/qr_image"
+                        app:layout_constraintTop_toBottomOf="@+id/editQrImage"
                         app:layout_constraintVertical_bias="0.5"
                         app:srcCompat="@drawable/baseline_save_alt_24" />
 
                     <ImageView
-                        android:id="@+id/shareImageView"
-                        android:layout_width="51dp"
-                        android:layout_height="49dp"
-                        android:foreground="?attr/selectableItemBackground"
+                        android:id="@+id/shareEditImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/view"
-                        app:layout_constraintHorizontal_bias="0.63"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/qr_image"
-                        app:layout_constraintVertical_bias="0.5"
-                        app:srcCompat="@drawable/baseline_share_24" />
-
-                    <ImageView
-                        android:id="@+id/addImageView"
-                        android:layout_width="49dp"
-                        android:layout_height="49dp"
                         android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.403"
-                        app:layout_constraintStart_toEndOf="@+id/view"
-                        app:layout_constraintTop_toBottomOf="@+id/qr_image"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/editQrImage"
                         app:layout_constraintVertical_bias="0.5"
-                        app:srcCompat="@drawable/baseline_storage_24_2" />
+                        app:srcCompat="@drawable/baseline_share_24" />
+
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/editTextView4"
                 style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="Scanned Information:-"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/qrCardView" />
+                app:layout_constraintTop_toBottomOf="@+id/EditQrCardView" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/ButtonCadView"
+                android:id="@+id/editButtonCadView"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginStart="16dp"
@@ -160,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/editTextView4"
                 app:layout_constraintVertical_bias="0.085">
 
 
@@ -171,7 +138,7 @@
 
 
                     <TextView
-                        android:id="@+id/generated_scan_result"
+                        android:id="@+id/edit_scan_result"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
@@ -187,7 +154,7 @@
             </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/back"
+                android:id="@+id/editBack"
                 android:layout_width="53dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
@@ -196,7 +163,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_arrow_back_24" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

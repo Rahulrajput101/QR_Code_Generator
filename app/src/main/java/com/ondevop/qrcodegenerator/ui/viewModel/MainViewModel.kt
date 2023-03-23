@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.ondevop.qrcodegenerator.db.QrData
 import com.ondevop.qrcodegenerator.repository.Repository
 import com.ondevop.qrcodegenerator.utils.MainUiEvents
-import com.ondevop.qrcodegenerator.utils.QrUtility
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -53,11 +52,6 @@ class MainViewModel @Inject constructor(
             }
 
 
-            is MainUiEvents.shareQr -> {
-
-            }
-
-
            is  MainUiEvents.DeleteQr -> {
                 viewModelScope.launch {
                     repository.deleteQr(event.qrData)
@@ -82,9 +76,6 @@ class MainViewModel @Inject constructor(
         isVisible.value = visible
     }
 
-    fun setTorchOn(torchState : Boolean){
-        isTorchOn.value = torchState
-    }
 
 
 
@@ -93,7 +84,7 @@ class MainViewModel @Inject constructor(
 
     sealed class UiEvent {
         data class ShowSnackbar(val message: String) : UiEvent()
-        object AddQr : UiEvent()
+
     }
 
 

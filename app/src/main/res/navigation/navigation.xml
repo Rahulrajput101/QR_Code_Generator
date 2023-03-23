@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.MainFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_screen.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrGeneratedFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.QrGeneratedFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_screen.QrGeneratedFragment"
         android:label="fragment_qr_generated"
         tools:layout="@layout/fragment_qr_generated" >
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/scannerFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.ScannerFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.scan_screen.ScannerFragment"
         android:label="ScannerFragment" >
 
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/scanResultFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.ScanResultFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.scan_screen.ScanResultFragment"
         android:label="fragment_scan_result"
         tools:layout="@layout/fragment_scan_result" >
         <argument
@@ -48,8 +48,21 @@
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.SavedFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.saved_screen.SavedFragment"
         android:label="fragment_saved"
-        tools:layout="@layout/fragment_saved" />
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_savedFragment_to_savedEditFragment"
+            app:destination="@id/savedEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedEditFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.saved_screen.SavedEditFragment"
+        android:label="fragment_saved_edit"
+        tools:layout="@layout/fragment_saved_edit" >
+        <argument
+            android:name="saved_result_text"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

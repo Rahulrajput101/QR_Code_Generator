@@ -1,13 +1,11 @@
-package com.ondevop.qrcodegenerator.ui.fragment
+package com.ondevop.qrcodegenerator.ui.fragment.scan_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
-import com.ondevop.qrcodegenerator.R
 import com.ondevop.qrcodegenerator.databinding.FragmentScanResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 

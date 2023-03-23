@@ -6,7 +6,7 @@ import com.ondevop.qrcodegenerator.db.QrData
 
 sealed interface MainUiEvents{
      object AddQr : MainUiEvents
-     object shareQr : MainUiEvents
+
      data class DeleteQr(val qrData : QrData) : MainUiEvents
      
 

@@ -1,18 +1,15 @@
-package com.ondevop.qrcodegenerator.ui.fragment
+package com.ondevop.qrcodegenerator.ui.fragment.saved_screen
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.ondevop.qrcodegenerator.R
 import com.ondevop.qrcodegenerator.adapter.SavedAdapter
 import com.ondevop.qrcodegenerator.databinding.FragmentSavedBinding
 import com.ondevop.qrcodegenerator.ui.viewModel.MainViewModel
@@ -44,8 +41,7 @@ class SavedFragment : Fragment() {
             viewModel.eventFlow.collectLatest {event->
                 when(event){
                     is MainViewModel.UiEvent.ShowSnackbar -> {
-                       Snackbar.make(requireView(), event.message,Snackbar.LENGTH_SHORT)
-                           .setTextColor(ContextCompat.getColor(requireContext(),R.color.md_theme_light_primaryContainer)).show()
+                       Snackbar.make(requireView(), event.message,Snackbar.LENGTH_SHORT).show()
                     }
                     else ->{}
                 }
@@ -54,8 +50,11 @@ class SavedFragment : Fragment() {
 
 
         adapter = SavedAdapter(SavedAdapter.OnUserClickListener(
-            {
-            //handle click
+            {qrData->
+            //handle item click
+                viewModel.setBitmapValue(qrData.bitmap!!)
+                viewModel.setVisibility(false)
+                findNavController().navigate(SavedFragmentDirections.actionSavedFragmentToSavedEditFragment(qrData.result!!))
             },
             {
                 viewModel.onEvent(MainUiEvents.DeleteQr(it))
