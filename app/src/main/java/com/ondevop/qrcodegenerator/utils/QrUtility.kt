@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.TypedValue
 import android.widget.Toast
 import androidx.camera.core.Camera
 import androidx.core.app.ActivityCompat
@@ -114,10 +115,15 @@ object QrUtility {
                   it.putExtra(Intent.EXTRA_TEXT, "Hey, I have created this amazing QR code")
               }
           } ?: return null
-        // This creates a share intent with the ACTION_SEND action
-
     }
 
+
+    fun provideBackgrounColorPrimary(context : Context) : Int {
+        val primaryColorAttr = android.R.attr.colorPrimary
+        val primaryColorValue = TypedValue()
+        context.theme.resolveAttribute(primaryColorAttr, primaryColorValue, true)
+        return primaryColorValue.data
+    }
 
 
 

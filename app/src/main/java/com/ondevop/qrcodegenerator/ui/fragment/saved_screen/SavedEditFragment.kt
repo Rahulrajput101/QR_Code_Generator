@@ -15,13 +15,13 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.ondevop.qrcodegenerator.R
 import com.ondevop.qrcodegenerator.databinding.FragmentSavedEditBinding
-import com.ondevop.qrcodegenerator.ui.fragment.create_screen.QrGeneratedFragmentArgs
 import com.ondevop.qrcodegenerator.ui.viewModel.MainViewModel
 import com.ondevop.qrcodegenerator.utils.MainUiEvents
 import com.ondevop.qrcodegenerator.utils.QrUtility
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 
 class SavedEditFragment : Fragment() {
@@ -37,8 +37,10 @@ class SavedEditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         binding = FragmentSavedEditBinding.inflate(layoutInflater)
+
+        val primaryColor = QrUtility.provideBackgrounColorPrimary(requireContext())
+        binding.backgroundImage.setBackgroundColor(primaryColor)
 
         val savedResultText = args.savedResultText
         binding.editScanResult.text = savedResultText

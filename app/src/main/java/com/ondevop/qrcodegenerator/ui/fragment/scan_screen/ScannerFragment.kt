@@ -1,7 +1,13 @@
 package com.ondevop.qrcodegenerator.ui.fragment.scan_screen
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ScannerFragment : Fragment() {
 
     private lateinit var binding: FragmentScannerBinding
-    private val viewModel: MainViewModel by activityViewModels()
     private var isTorchOn = false
     private var camera: Camera? = null
 
@@ -41,26 +46,22 @@ class ScannerFragment : Fragment() {
          */
         requestPermissionAndStartCamera()
 
+        if(QrUtility.hasCameraPermission(requireContext())){
+            startCamera(binding.cameraPreview)
+        }
+
         binding.flashImageView.setOnClickListener {
 
             //This will turn on and turn off the torch
             toggleTorch()
         }
 
-
-
-
-
-
         return binding.root
     }
 
 
     fun requestPermissionAndStartCamera() {
-        if (QrUtility.hasCameraPermission(requireContext())) {
-            startCamera(binding.cameraPreview)
-
-        } else {
+        if (!QrUtility.hasCameraPermission(requireContext())) {
             cameraPremissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
@@ -68,10 +69,17 @@ class ScannerFragment : Fragment() {
     private val cameraPremissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
-        startCamera(binding.cameraPreview)
+        if(isGranted){
+            Log.d("accepted", " success")
+        }else{
+           askForFinalPermission()
+        }
+
     }
 
 
+    /*This is a function that initializes the camera and set preview using a PreviewView.
+     and launches a QrCodeImageAnalyzer to  extract QR codes.*/
     private fun startCamera(previewView: PreviewView) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
@@ -110,7 +118,6 @@ class ScannerFragment : Fragment() {
                 camera = this
             }
 
-
         }, ContextCompat.getMainExecutor(requireContext()))
 
     }
@@ -130,6 +137,26 @@ class ScannerFragment : Fragment() {
         startCamera(binding.cameraPreview)
     }
 
+    private fun askForFinalPermission() {
+        val message = "Camera permission is required to use this feature"
+        val intent = Intent()
+        val dialog = AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Go to ->") { _, _ ->
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                val packageName = requireContext().packageName
+                //Toast.makeText(requireContext()," package:$packageName", Toast.LENGTH_LONG).show()
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+
+            }
+            .setNegativeButton("Deny") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+
+            }.create()
+
+        dialog.show()
+    }
 
 
 

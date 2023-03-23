@@ -2,11 +2,14 @@ package com.ondevop.qrcodegenerator.ui
 
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,12 +30,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        //Setting up the navigation for bottom navigation
         val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHost.navController
         binding.bottomNavigation.setupWithNavController(navController)
-
-
-
         navHost.findNavController()
             .addOnDestinationChangedListener{_,destination,_ ->
                 when(destination.id){
@@ -41,9 +45,6 @@ class MainActivity : AppCompatActivity() {
                     else ->  binding.bottomNavigation.visibility = View.GONE
                 }
             }
-
-
-
 
 
 

@@ -26,7 +26,6 @@ class MainViewModel @Inject constructor(
     val scanResult : LiveData<String> = _scanResult
 
     var isVisible = MutableLiveData<Boolean>()
-    var isTorchOn = MutableLiveData<Boolean>()
 
     val savedQrData = repository.getQr()
 
@@ -39,7 +38,6 @@ class MainViewModel @Inject constructor(
         when(event){
 
            is  MainUiEvents.AddQr -> {
-
                 viewModelScope.launch {
                         repository.insertQr(
                             QrData(
@@ -50,7 +48,6 @@ class MainViewModel @Inject constructor(
                     _eventFlow.send(UiEvent.ShowSnackbar("Added successfully"))
                 }
             }
-
 
            is  MainUiEvents.DeleteQr -> {
                 viewModelScope.launch {
@@ -75,9 +72,6 @@ class MainViewModel @Inject constructor(
     fun setVisibility(visible : Boolean){
         isVisible.value = visible
     }
-
-
-
 
 
 

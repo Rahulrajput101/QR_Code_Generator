@@ -24,10 +24,7 @@ class SavedFragment : Fragment() {
 
     private lateinit var binding : FragmentSavedBinding
     private lateinit var adapter : SavedAdapter
-
     private val viewModel: MainViewModel by activityViewModels()
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,27 +33,17 @@ class SavedFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSavedBinding.inflate(layoutInflater)
 
-
-        lifecycleScope.launch {
-            viewModel.eventFlow.collectLatest {event->
-                when(event){
-                    is MainViewModel.UiEvent.ShowSnackbar -> {
-                       Snackbar.make(requireView(), event.message,Snackbar.LENGTH_SHORT).show()
-                    }
-                    else ->{}
-                }
-            }
-        }
-
+        handlingOneTimeEvent()
 
         adapter = SavedAdapter(SavedAdapter.OnUserClickListener(
             {qrData->
-            //handle item click
+               //handle item click click on item
                 viewModel.setBitmapValue(qrData.bitmap!!)
                 viewModel.setVisibility(false)
                 findNavController().navigate(SavedFragmentDirections.actionSavedFragmentToSavedEditFragment(qrData.result!!))
             },
             {
+                //handle the click on delete icon
                 viewModel.onEvent(MainUiEvents.DeleteQr(it))
             }
         ))
@@ -67,13 +54,25 @@ class SavedFragment : Fragment() {
 
         viewModel.savedQrData.observe(viewLifecycleOwner){result ->
             result?.let {
-               adapter.differ.submitList(it)
+                val sortedList =it.reversed()
+               adapter.differ.submitList(sortedList)
             }
         }
 
-
-
         return binding.root
+    }
+
+    private fun handlingOneTimeEvent() {
+        lifecycleScope.launch {
+            viewModel.eventFlow.collectLatest {event->
+                when(event){
+                    is MainViewModel.UiEvent.ShowSnackbar -> {
+                        Snackbar.make(requireView(), event.message,Snackbar.LENGTH_SHORT).show()
+                    }
+                    else ->{}
+                }
+            }
+        }
     }
 
 

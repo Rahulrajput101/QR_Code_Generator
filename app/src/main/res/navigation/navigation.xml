@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_screen.MainFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_feature.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrGeneratedFragment"
-        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_screen.QrGeneratedFragment"
+        android:name="com.ondevop.qrcodegenerator.ui.fragment.create_feature.QrGeneratedFragment"
         android:label="fragment_qr_generated"
         tools:layout="@layout/fragment_qr_generated" >
 

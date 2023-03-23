@@ -1,4 +1,4 @@
-package com.ondevop.qrcodegenerator.ui.fragment.create_screen
+package com.ondevop.qrcodegenerator.ui.fragment.create_feature
 
 import android.content.Intent
 import android.net.Uri
@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.UUID
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class QrGeneratedFragment : Fragment() {
@@ -33,6 +34,7 @@ class QrGeneratedFragment : Fragment() {
     private var qrUri: Uri? = null
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +42,11 @@ class QrGeneratedFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentQrGeneratedBinding.inflate(layoutInflater)
 
+        val primaryColor = QrUtility.provideBackgrounColorPrimary(requireContext())
+        binding.backgroundImage.setBackgroundColor(primaryColor)
 
+        //This function shows snackbar, when the data is saved and deleted in database
+        handlingOneTimeEvent()
 
         val generatedResultText = args.generatedResultText
         binding.generatedScanResult.text = generatedResultText
@@ -52,9 +58,12 @@ class QrGeneratedFragment : Fragment() {
         }
 
         viewModel.isVisible.observe(viewLifecycleOwner) { visible ->
+            /*This method set the visibility,
+             when the qr code is downloaded and makes share button visible */
             updateVisibility(visible)
         }
 
+        //Here we are saving the qrCode to extenral storage
         binding.downloadImageView.setOnClickListener {
             val bitmap = viewModel.bitmap.value
             bitmap?.let {
@@ -92,11 +101,21 @@ class QrGeneratedFragment : Fragment() {
         return binding.root
     }
 
+    private fun handlingOneTimeEvent() {
+        lifecycleScope.launch {
+            viewModel.eventFlow.collectLatest {event->
+                when(event){
+                    is MainViewModel.UiEvent.ShowSnackbar -> {
+                        Snackbar.make(requireView(), event.message,Snackbar.LENGTH_SHORT).show()
+                    }
+                    else ->{}
+                }
+            }
+        }
+    }
 
 
 
-
-    //This method set the visibility when the qr code is downloaded and makes share button visible
     private fun updateVisibility(isVisible: Boolean) {
         this.isVisible = isVisible
         if (isVisible) {

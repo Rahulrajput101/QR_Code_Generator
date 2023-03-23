@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id ="@+id/backgroundImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/md_theme_light_primary"
@@ -27,6 +28,7 @@
                 android:id="@+id/qrCardView"
                 android:layout_width="0dp"
                 android:layout_height="350dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="35dp"
                 android:layout_marginEnd="35dp"
                 app:cardCornerRadius="29dp"
@@ -110,8 +112,9 @@
 
                     <ImageView
                         android:id="@+id/shareImageView"
-                        android:layout_width="51dp"
-                        android:layout_height="49dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:foreground="?attr/selectableItemBackground"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,8 +127,9 @@
 
                     <ImageView
                         android:id="@+id/addImageView"
-                        android:layout_width="49dp"
-                        android:layout_height="49dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +155,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/ButtonCadView"
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardCornerRadius="10dp"
@@ -176,6 +180,8 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
                         android:text="TextView"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -188,8 +194,9 @@
 
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="53dp"
-                android:layout_height="42dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:foreground="?attr/selectableItemBackground"

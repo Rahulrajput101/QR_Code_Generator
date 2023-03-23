@@ -1,6 +1,7 @@
 package com.ondevop.qrcodegenerator.di
 
 import android.content.Context
+import android.util.TypedValue
 import androidx.room.Room
 import com.ondevop.qrcodegenerator.db.QrDatabase
 import com.ondevop.qrcodegenerator.repository.Repository
@@ -31,6 +32,9 @@ object AppModule {
     fun provideRepository(db : QrDatabase) : Repository{
         return Repository(db.qrDao)
     }
+
+
+
 
 
 

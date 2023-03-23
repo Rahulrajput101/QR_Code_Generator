@@ -1,4 +1,4 @@
-package com.ondevop.qrcodegenerator.ui.fragment.create_screen
+package com.ondevop.qrcodegenerator.ui.fragment.create_feature
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ondevop.qrcodegenerator.databinding.FragmentMainBinding
 import com.ondevop.qrcodegenerator.ui.viewModel.MainViewModel
+import com.ondevop.qrcodegenerator.utils.QrUtility
 import com.ondevop.qrcodegenerator.utils.QrUtility.generateQrCode
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +21,6 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private var qrBitmap: Bitmap? = null
-
 
    private val viewModel: MainViewModel by activityViewModels()
 
@@ -32,10 +32,15 @@ class MainFragment : Fragment() {
 
         binding = FragmentMainBinding.inflate(layoutInflater)
 
+       val primaryColor = QrUtility.provideBackgrounColorPrimary(requireContext())
+        binding.backgroundImage.setBackgroundColor(primaryColor)
+
 
         binding.createButton.setOnClickListener {
             val text = binding.dataEdittext.text.toString()
             if (text.isNotEmpty()) {
+
+                //This will convert the text to bitmap
                 qrBitmap = generateQrCode(text)
 
                 qrBitmap?.let {
@@ -51,7 +56,6 @@ class MainFragment : Fragment() {
             }
             Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
         }
-
 
         return binding.root
     }
