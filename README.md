@@ -30,17 +30,7 @@ To use the app, follow these steps:
  
  
  Screenshorts
- Create screen ->
-![Screenshot_20230324_105837](https://user-images.githubusercontent.com/88555033/227437715-510d3dec-b10d-4578-b117-b6599193a2f2.jpg)
-![Screenshot_20230324_083252](https://user-images.githubusercontent.com/88555033/227437746-bc806e5e-dd0e-4931-b552-f70cd1365dfc.jpg)
-
-Scan screen ->
-![Screenshot_20230324_093556](https://user-images.githubusercontent.com/88555033/227437824-f4c1115c-fd06-4ac5-9c78-7a6a2ae092e8.jpg)
-![Screenshot_20230324_105518](https://user-images.githubusercontent.com/88555033/227437850-394afc01-1fd7-4844-88bc-cc1b8272114f.jpg)
-
-Saved screen ->
-![Screenshot_20230324_105431](https://user-images.githubusercontent.com/88555033/227437895-51eb9f50-566f-4b9c-ab3e-d89361bf9aaa.jpg)
-![Screenshot_20230324_083437](https://user-images.githubusercontent.com/88555033/227437953-9de69c6a-93b1-45b9-b03e-a8982a6e7b9e.jpg)
+[app screenshorts.pdf](https://github.com/Rahulrajput101/QR_Code_Generator/files/11058949/app.screenshorts.pdf)
 
  
  
